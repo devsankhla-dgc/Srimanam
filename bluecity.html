@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue City Tour</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. General Reset & Fonts --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Manrope', sans-serif; }
+
+        body {
+            background-color: #fefdff;
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- 2. Header Styles --- */
+        .header-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            width: 95%;
+            max-width: 1200px;
+            height: 70px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: #E8ECF7 solid 1px;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+
+        .nav-menu { display: flex; align-items: center; gap: 5px; }
+        .nav-link {
+            text-decoration: none; color: #001D3C; font-weight: 500; font-size: 15px;
+            padding: 12px 12px; border-radius: 30px; transition: all 0.3s ease;
+        }
+        .nav-link.active { background-color: #E1F1FF; color: #000; }
+        .nav-link:hover { color: #001D3C; background-color: #E0EFFF; }
+
+        .logo-section {
+            display: flex; align-items: center; gap: 10px;
+            position: absolute; left: 50%; transform: translateX(-50%);
+        }
+        .logo-icon img { height: 40px; width: auto; }
+
+        .right-section { display: flex; align-items: center; gap: 20px; }
+        .email-link {
+            display: flex; align-items: center; gap: 8px;
+            text-decoration: none; color: #333; font-size: 14px; font-weight: 500;
+        }
+        .email-icon { width: 18px; height: 18px; fill: #007BFF; }
+
+        .book-btn {
+            background-color: #007BFF; color: white; text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+            padding: 5px 6px 5px 20px; border-radius: 40px;
+            font-weight: 500; font-size: 15px; transition: background 0.3s;
+        }
+        .book-btn:hover { background-color: #0168D9; }
+
+        .btn-circle {
+            background-color: white; width: 38px; height: 38px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .arrow-icon { width: 20px; height: 20px; fill: #0168D9; }
+
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 101; }
+        .bar { width: 25px; height: 3px; background-color: #333; border-radius: 5px; }
+
+        .mobile-menu-container {
+            display: none; position: absolute; top: 80px; left: 0; right: 0;
+            background-color: white; border-radius: 20px; padding: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            flex-direction: column; align-items: center; gap: 15px; width: 100%;
+        }
+
+        /* --- 3. Hero Section Styles --- */
+        .hero-section {
+            width: 100%; max-width: 100%; height: 900px;
+            position: relative; display: flex;
+            background-image: url("Assets/Hero\ Image.jpg");
+            background-size: cover; background-position: center;
+            flex-direction: column; align-items: center;
+            color: #001D3C; overflow: hidden;
+        }
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(230,235,255,0.9) 0%, rgba(255,255,255,0) 50%);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative; z-index: 2; text-align: center; max-width: 800px;
+            display: flex; flex-direction: column; align-items: center; gap: 15px; padding-top: 130px;
+        }
+        .hero-tag {
+            background-color: white; padding: 8px 16px; border-radius: 20px;
+            font-size: 13px; font-weight: 700; color: #001D3C;
+            display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .dot { width: 8px; height: 8px; background-color: #007BFF; border-radius: 50%; }
+        .hero-title { font-size: 60px; font-weight: 600; line-height: 1.1; color: #001D3C; }
+        .hero-title span { font-family: 'Playfair Display', serif; color: #007BFF; font-weight: 700; font-style: italic; }
+        .hero-subtitle { font-size: 20px; color: #001D3C; max-width: 500px; line-height: 1.5; }
+
+        /* --- 4. About Section Styles --- */
+        .about-section {
+            width: 100%; max-width: 1200px; position: relative;
+            padding: 160px 20px 80px 20px; margin-top: -50px; z-index: 10;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .polaroid-container { position: absolute; top: 100px; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        .polaroid-card { position: absolute; width: 300px; z-index: 1; }
+        .polaroid-card img { width: 100%; height: auto; border-radius: 2px; }
+        .p-left-top { top: 20px; left: 0; transform: rotate(-8deg); }
+        .p-right { top: 50px; right: 0; transform: rotate(6deg); }
+        .about-content { position: relative; z-index: 5; text-align: center; max-width: 650px; }
+        .about-pill {
+            display: inline-block; padding: 6px 16px; border: 1px solid #E0EFFF;
+            border-radius: 20px; font-size: 12px; font-weight: 700; color: #007BFF;
+            margin-bottom: 15px; background: #fff;
+        }
+        .about-title { font-size: 42px; font-weight: 700; color: #001D3C; line-height: 1.2; margin-bottom: 20px; }
+        .about-title .blue-italic { font-family: 'Playfair Display', serif; font-style: italic; color: #007BFF; font-weight: 600; }
+        .about-desc { font-size: 16px; color: #001D3C; line-height: 1.6; margin-bottom: 30px; }
+        .check-list { list-style: none; display: flex; flex-direction: column; gap: 12px; align-items: left; margin-bottom: 50px; margin-left: 10px; }
+        .check-item { display: flex; align-items: center; gap: 10px; color: #333; font-weight: 500; font-size: 15px; }
+        .check-icon { width: 20px; height: 20px; background-color: #007BFF; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .features-wrapper { position: relative; width: 100%; max-width: 800px; margin-top: 60px; }
+        .yellow-tag {
+            background-color: #FFC107; color: #713F12; font-weight: 700; font-size: 14px;
+            padding: 8px 20px; border-radius: 8px; position: absolute;
+            top: -18px; left: 50%; transform: translateX(-50%); z-index: 6;
+            box-shadow: 0 4px 10px rgba(255, 193, 7, 0.3); rotate: calc(5deg);
+        }
+        .features-box {
+            background-color: #FFF9F0; border-radius: 24px; padding: 50px 40px 40px 40px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 30px;
+        }
+        .feature-item { display: flex; align-items: start; gap: 12px; }
+        .f-icon { width: 20px; height: 20px; fill: #007BFF; margin-top: 3px; flex-shrink: 0; }
+        .f-text h4 { font-size: 16px; color: #6B3B00; font-weight: 700; margin-bottom: 4px; }
+        .f-text p { font-size: 14px; color: #001D3C; opacity: 1; line-height: 1.4; font-weight: 500; }
+
+        /* --- 5. Host Section Styles --- */
+        .host-section {
+            width: 100%; max-width: 1200px; padding: 80px 20px; margin-top: 40px;
+            display: flex; justify-content: center;
+        }
+        .host-container { display: flex; align-items: center; gap: 60px; width: 100%; }
+        .host-image-wrapper { flex: 1; display: flex; justify-content: center; position: relative; }
+        .host-img {
+            width: 100%; max-width: 450px; height: auto;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; object-fit: cover;
+        }
+        .host-content { flex: 1.2; text-align: left; }
+        .host-stats {
+            display: flex; gap: 30px; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;
+        }
+        .stat-item { padding-left: 12px; border-left: 2px solid #007BFF; }
+        .stat-item:first-child {  padding-left: 12px; border-left: 2px solid #007BFF; }
+        .stat-number { font-size: 18px; font-weight: 700; color: #007BFF; margin-bottom: 5px; }
+        .stat-label { font-size: 16px; color: #001D3C; font-weight: 600; }
+
+        /* --- 6. NEW HIGHLIGHTS SECTION STYLES --- */
+        .highlights-section {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            height: 700px; /* Fixed height for the circular layout on desktop */
+            margin: 60px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Central Hub Text */
+        .highlights-center {
+            text-align: center;
+            z-index: 10;
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* The Cards */
+        .h-card {
+            position: absolute;
+            background: #FFF7ED;
+            border: 1px solid #FFDFB8;
+            border-radius: 60px; /* Pill shape */
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 2px 0px rgba(0,0,0,0.05);
+            width: 290px;
+            transition: transform 0.3s;
+            z-index: 2;
+        }
+        .h-card:hover { transform: scale(1.05); z-index: 20; }
+
+        .h-img-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 1px solid white;
+        }
+        .h-img-circle img { width: 100%; height: 100%; object-fit: cover; }
+
+        .h-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: #001D3C;
+            padding-right: 15px;
+        }
+
+        /* Connecting Lines (Dashed) */
+        .h-card::before {
+            content: '';
+            position: absolute;
+            height: 1px;
+            background-image: linear-gradient(to right, #C49A6C 50%, transparent 50%);
+            background-size: 10px 100%; /* Dash size */
+            z-index: -1;
+            /* Default line settings, customized per card below */
+            top: 50%;
+            width: 120px; 
+            transform-origin: 0 0;
+        }
+
+        /* --- POSITIONS (Desktop) --- */
+        
+        /* Left Column */
+        .h-c1 { top: 60px; left: 60px;  } /* Blue City */
+        .h-c1::before { left: 100%; width: 180px; transform: rotate(25deg); }
+
+        .h-c2 { top: 300px; left: 0px; } /* Street Food */
+        .h-c2::before { left: 100%; width: 150px; transform: rotate(0deg); }
+
+        .h-c3 { bottom: 60px; left: 60px; } /* Markets */
+        .h-c3::before { left: 100%; width: 180px; transform: rotate(-25deg); }
+
+
+        /* Right Column (Cards flipped for better design) */
+        .h-c4 { top: 60px; right: 60px; flex-direction: row; text-align: right; } /* Fort */
+        .h-c4 .h-text { padding-right: 0; padding-left: 15px; }
+        .h-c4::before { right: 100%; width: 180px; transform-origin: 100% 0; transform: rotate(-25deg); }
+
+        .h-c5 { top: 300px; right: 0px; flex-direction: row; text-align: right; } /* Sunset */
+        .h-c5 .h-text { padding-right: 0; padding-left: 15px; }
+        .h-c5::before { right: 100%; width: 150px; transform-origin: 100% 0; transform: rotate(0deg); }
+
+        .h-c6 { bottom: 60px; right: 60px; flex-direction: row; text-align: right; } /* Temples */
+        .h-c6 .h-text { padding-right: 0; padding-left: 15px; }
+        .h-c6::before { right: 100%; width: 180px; transform-origin: 100% 0; transform: rotate(25deg); }
+
+
+        /* --- RESPONSIVE MEDIA QUERIES --- */
+        @media (max-width: 950px) {
+            .email-link { display: none; }
+            .polaroid-card { width: 150px; }
+            .p-left-top { left: -20px; } .p-right { right: -20px; }
+            .host-container { flex-direction: column; gap: 40px; }
+            .host-content { text-align: center; }
+            .host-stats { justify-content: center; flex-wrap: wrap; }
+            .stat-item { border-left: none; padding: 0 15px; border-right: 2px solid #007BFF; }
+            
+            /* Highlights Tablet/Mobile */
+            .highlights-section { height: auto; flex-direction: column; gap: 40px; padding: 40px 20px; }
+            .h-card { position: relative; top: auto; left: auto; right: auto; bottom: auto; width: 100%; max-width: 400px; flex-direction: row !important; text-align: left !important; }
+            .h-card .h-text { padding-left: 0; padding-right: 0; }
+            .h-card::before { display: none; } /* Hide lines on mobile */
+            .highlights-center { order: -1; margin-bottom: 20px; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu, .right-section { display: none; }
+            .hamburger { display: flex; margin-left: auto; }
+            .header-container { justify-content: flex-start; }
+            .mobile-menu-container.open { display: flex; }
+            .hero-section { height: 500px; padding-top: 40px; }
+            .hero-title { font-size: 36px; }
+            .polaroid-container { display: none; }
+            .about-title { font-size: 32px; }
+            .features-box { grid-template-columns: 1fr; padding: 40px 20px 20px 20px; }
+            .host-stats { gap: 15px; }
+            .stat-item { border-right: none; border-bottom: 1px solid #ddd; padding-bottom: 10px; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header-container">
+        <nav class="nav-menu">
+            <a href="#" class="nav-link active">About</a>
+            <a href="#" class="nav-link">Itinerary</a>
+            <a href="#" class="nav-link">Review</a>
+        </nav>
+        <div class="logo-section">
+            <div class="logo-icon"> <img src="Assets/Logo.svg" alt="BlueCity" style="width: 120px;"></div> 
+        </div>
+        <div class="right-section">
+            <a href="mailto:Shivnarayan012@gmail.com" class="email-link">
+                <svg class="email-icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                Shivnarayan012@gmail.com
+            </a>
+            <a href="#" class="book-btn">
+                Book Tour
+                <div class="btn-circle">
+                    <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                </div>
+            </a>
+        </div>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        </div>
+        <div class="mobile-menu-container" id="mobileMenu">
+            <a href="#" class="nav-link active">About</a>
+            <a href="#" class="nav-link">Itinerary</a>
+            <a href="#" class="nav-link">Review</a>
+            <a href="#" class="book-btn">
+                Book Tour
+                <div class="btn-circle">
+                    <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                </div>
+            </a>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-tag"><span class="dot"></span> The Blue City of Rajasthan</div>
+            <h1 class="hero-title">Discover the Magic of <span>Jodhpur</span></h1>
+            <p class="hero-subtitle">Walk with a local and uncover hidden treasures, rich stories, and the vibrant culture of the Blue City.</p>
+            <a href="#" class="book-btn" style="margin-top: 10px;">
+                Book Tour
+                <div class="btn-circle">
+                    <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <div class="polaroid-container">
+            <div class="polaroid-card p-left-top"><img src="Assets/Frame 1171277397.png" alt="Jodhpur Interior"></div>
+            <div class="polaroid-card p-right"><img src="Assets/Frame 1171277398.png" alt="Jodhpur Interior"></div>
+        </div>
+        <div class="about-content">
+            <span class="about-pill">About the Tour</span>
+            <h2 class="about-title">Led by a Local.<br><span class="blue-italic">Curated with Love.</span></h2>
+            <p class="about-desc">We are proud locals of Jodhpur, born and raised amidst its royal heritage and warm hospitality. Our aim is to share Jodhpur’s charm through stories, food, and history.</p>
+            <ul class="check-list" style="padding-left: 130px;">
+                <li class="check-item"><div class="check-icon"><img src="Assets/Check.svg" alt="check"></div> We love meeting people from across the globe</li>
+                <li class="check-item"><div class="check-icon"><img src="Assets/Check.svg" alt="check"></div> Every tour is warm, safe, and personal</li>
+                <li class="check-item"><div class="check-icon"><img src="Assets/Check.svg" alt="check"></div> It’s not just a walk — it’s a journey through living history</li>
+            </ul>
+        </div>
+        <div class="features-wrapper">
+            <div class="yellow-tag">Why Choose Us?</div>
+            <div class="features-box">
+                <div class="feature-item">
+                    <svg class="f-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <div class="f-text"><h4>Offbeat Stories</h4><p>Local legends & hidden gems</p></div>
+                </div>
+                <div class="feature-item">
+                    <svg class="f-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <div class="f-text"><h4>Small Groups</h4><p>Personal attention & safety</p></div>
+                </div>
+                <div class="feature-item">
+                    <svg class="f-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <div class="f-text"><h4>Photo Spots</h4><p>Best angles for the Blue City</p></div>
+                </div>
+                <div class="feature-item">
+                    <svg class="f-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <div class="f-text"><h4>Heritage & Fun</h4><p>A mix of history, food & culture</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="host-section">
+        <div class="host-container">
+            <div class="host-image-wrapper">
+                 <img src="Assets/Papa Image.png" alt="Shiv - Your Host" class="host-img">
+            </div>
+            <div class="host-content">
+                <span class="about-pill">Your Local Host</span>
+                <h2 class="about-title">Khamma Ghani Saa! I'm <span class="blue-italic">Shiv</span></h2>
+                <p class="about-desc">
+                    "Born and raised in the winding blue lanes of the old city, Jodhpur isn’t just my home—it’s my heritage. I started these walks to bridge the gap between a tourist’s checklist and a local’s life."
+                </p>
+                <p class="about-desc">
+                    My passion is storytelling. Beyond the dates and architecture, I want to share the legends of the Rathore clan, the secrets of the indigo paint, and the best spot for Mirchi Vada that isn’t on Google Maps. When you walk with me, you’re not just a visitor; you’re a guest in my city.
+                </p>
+                <div class="host-stats">
+                    <div class="stat-item">
+                        <h3 class="stat-number">4+ Years</h3>
+                        <p class="stat-label">Guiding Experience</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 class="stat-number">English & Hindi</h3>
+                        <p class="stat-label">Fluent Communication</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 class="stat-number">40+</h3>
+                        <p class="stat-label">Happy Clients</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="highlights-section">
+        <div class="highlights-center"> 
+            <span class="about-pill">Experience the Best</span>
+            <h2 class="hero-title" style="font-size: 48px;">Highlights of <br><span>Jodhpur</span></h2>
+            <a href="#" class="book-btn" style="margin-top: 20px;">
+                Book Tour
+                <div class="btn-circle">
+                    <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                </div>
+            </a>
+        </div>
+
+        <div class="h-card h-c1">
+            <div class="h-img-circle"><img src="https://images.unsplash.com/photo-1572886729007-422998379447?q=80&w=200" alt="Blue City"></div>
+            <div class="h-text">Blue Old City</div>
+        </div>
+
+        <div class="h-card h-c2">
+            <div class="h-img-circle"><img src="https://images.unsplash.com/photo-1598509524136-121546e8c792?q=80&w=200" alt="Street Food"></div>
+            <div class="h-text">Famous Street Food</div>
+        </div>
+
+        <div class="h-card h-c3">
+            <div class="h-img-circle"><img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=200" alt="Markets"></div>
+            <div class="h-text">Local Markets</div>
+        </div>
+
+        <div class="h-card h-c4">
+            <div class="h-img-circle"><img src="https://images.unsplash.com/photo-1534234828569-1f942743b3e9?q=80&w=200" alt="Mehrangarh"></div>
+            <div class="h-text">Mehrangarh Fort</div>
+        </div>
+
+        <div class="h-card h-c5">
+            <div class="h-img-circle"><img src="https://images.unsplash.com/photo-1627916524330-316223e75390?q=80&w=200" alt="Sunset"></div>
+            <div class="h-text">Sunset Points</div>
+        </div>
+
+        <div class="h-card h-c6">
+            <div class="h-img-circle"><img src="https://images.unsplash.com/photo-1621245789647-70020f5904a4?q=80&w=200" alt="Temples"></div>
+            <div class="h-text">Temples & Stepwells</div>
+        </div>
+
+    </section>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('open');
+        }
+    </script>
+
+</body>
+</html>
