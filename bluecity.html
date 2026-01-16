@@ -139,6 +139,7 @@
         .check-list { list-style: none; display: flex; flex-direction: column; gap: 12px; align-items: left; margin-bottom: 50px; margin-left: 10px; }
         .check-item { display: flex; align-items: center; gap: 10px; color: #333; font-weight: 500; font-size: 15px; }
         .check-icon { width: 20px; height: 20px; background-color: #007BFF; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        
         .features-wrapper { position: relative; width: 100%; max-width: 800px; margin-top: 60px; }
         .yellow-tag {
             background-color: #FFC107; color: #713F12; font-weight: 700; font-size: 14px;
@@ -175,7 +176,94 @@
         .stat-number { font-size: 18px; font-weight: 700; color: #007BFF; margin-bottom: 5px; }
         .stat-label { font-size: 16px; color: #001D3C; font-weight: 600; }
 
-        /* --- 6. NEW HIGHLIGHTS SECTION STYLES --- */
+
+        /* --- 6. NEW ITINERARY SECTION STYLES --- */
+        .itinerary-section {
+            width: 100%;  /* Limits width to keep it looking like the image */
+            margin: 80px 0;
+            padding: 80px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+        }
+
+        .itinerary-header {
+            text-align: center; margin-bottom: 50px;
+        }
+        .itinerary-header h2 { font-size: 48px; font-weight: 600; color: #001D3C; }
+        .itinerary-header h2 span { font-family: 'Playfair Display', serif; color: #007BFF; font-style: italic; }
+        .itinerary-header p { color: #001D3C; font-size: 16px; margin-top: 5px; }
+
+        .timeline-container {
+            display: flex; flex-direction: column; align-items: center; width: 100%;
+        }
+
+        /* The Nodes (Start/End) */
+        .node-card {
+            background: white;
+            border: 1px solid #D9E0F2;
+            border-radius: 12px;
+            padding: 12px 25px 12px 12px;
+            display: flex; align-items: center; gap: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            width: 100%; max-width: 500px;
+            position: relative; z-index: 2;
+        }
+        
+        .node-icon-box {
+            width: 50px; height: 50px;
+            border-radius: 8px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: white; font-size: 10px; font-weight: 700;
+        }
+        .node-start { background-color: #E1F1FF; color: #007BFF; }
+        .node-start svg { fill: #007BFF; width: 24px; }
+        
+        .node-end { background-color: #22C55E; color: white; }
+        .node-end svg { fill: white; width: 24px; stroke: white; stroke-width: 2px; }
+
+        .node-text h4 { color: #007BFF; font-size: 16px; font-weight: 700; margin-bottom: 2px; }
+        .node-text.end h4 { color: #22C55E; }
+        .node-text p { color: #001D3C; font-size: 14px; }
+        .node-text span { display: block; font-size: 12px; color: #666; margin-top: 2px; }
+
+        /* The Connector Line */
+        .timeline-connector {
+            width: 0px;
+            height: 40px;
+            border-left: 2px dashed #007BFF;
+            margin: 5px 0;
+            opacity: 0.5;
+        }
+
+        /* The Itinerary Card */
+        .t-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            display: flex; gap: 20px;
+            align-items: center;
+            width: 100%; max-width: 500px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+            border: 1px solid #D9E0F2;
+            position: relative; z-index: 2;
+        }
+        .t-img {
+            width: 180px; height: 148px; ;
+            border-radius: 4px; overflow: hidden;
+            flex-shrink: 0;
+        }
+        .t-img img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .t-content { flex: 1; }
+        .t-title { font-size: 18px; font-weight: 700; color: #001D3C; margin-bottom: 5px; }
+        .t-desc { font-size: 14px; color: #002C5C; line-height: 1.4; margin-bottom: 10px; }
+        
+        .t-meta { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #002C5C; font-weight: 500; }
+        .t-meta svg { width: 14px; height: 14px; fill: #002C5C; }
+
+        /* --- 7. HIGHLIGHTS SECTION STYLES --- */
         .highlights-section {
             position: relative;
             width: 100%;
@@ -249,19 +337,19 @@
         
         /* Left Column */
         .h-c1 { top: 60px; left: 60px;  } /* Blue City */
-        .h-c1::before { left: 100%; width: 180px; transform: rotate(25deg); }
+        .h-c1::before { left: 100%; width: 200px; transform: rotate(40deg); border-color: ;}
 
         .h-c2 { top: 300px; left: 0px; } /* Street Food */
         .h-c2::before { left: 100%; width: 150px; transform: rotate(0deg); }
 
         .h-c3 { bottom: 60px; left: 60px; } /* Markets */
-        .h-c3::before { left: 100%; width: 180px; transform: rotate(-25deg); }
+        .h-c3::before { left: 100%; width: 200px; transform: rotate(-40deg); }
 
 
         /* Right Column (Cards flipped for better design) */
         .h-c4 { top: 60px; right: 60px; flex-direction: row; text-align: right; } /* Fort */
         .h-c4 .h-text { padding-right: 0; padding-left: 15px; }
-        .h-c4::before { right: 100%; width: 180px; transform-origin: 100% 0; transform: rotate(-25deg); }
+        .h-c4::before { right: 100%; width: 200px; transform-origin: 100% 0; transform: rotate(-40deg); }
 
         .h-c5 { top: 300px; right: 0px; flex-direction: row; text-align: right; } /* Sunset */
         .h-c5 .h-text { padding-right: 0; padding-left: 15px; }
@@ -269,7 +357,94 @@
 
         .h-c6 { bottom: 60px; right: 60px; flex-direction: row; text-align: right; } /* Temples */
         .h-c6 .h-text { padding-right: 0; padding-left: 15px; }
-        .h-c6::before { right: 100%; width: 180px; transform-origin: 100% 0; transform: rotate(25deg); }
+        .h-c6::before { right: 100%; width: 200px; transform-origin: 100% 0; transform: rotate(40deg); }
+
+        /* --- NEW EXPLORE SECTION (Dark Blue) --- */
+        
+        .explore-section {
+            width: 100%;
+            background-color: #021759; /* Deep Navy Blue */
+            padding: 100px 20px;
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        
+        /* Dotted Map Background Pattern */
+        .explore-map-bg {
+            position: absolute;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 100%; max-width: 1200px; height: 100%;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+        
+        .explore-pill {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-size: 13px;
+            color: white;
+            margin-bottom: 20px;
+        }
+        .explore-pill::before {
+            content: '●'; color: #007BFF; margin-right: 8px;
+        }
+        
+        .explore-header h2 { font-size: 56px; font-weight: 600; margin-bottom: 10px; }
+        .explore-header h2 span { font-family: 'Playfair Display', serif; font-style: italic; }
+        .explore-header p { font-size: 16px; opacity: 0.8; max-width: 600px; margin: 0 auto 60px auto; }
+        
+        /* Circular Cards Container */
+        .explore-grid {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            height: 600px; /* Fixed height for absolute layout */
+        }
+        
+        .ex-circle {
+            position: absolute;
+            border-radius: 50%;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .ex-circle:hover { transform: scale(1.05); border-color: rgba(255,255,255,0.5); }
+        .ex-circle img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .ex-label {
+            position: absolute;
+            bottom: 30px; left: 50%; transform: translateX(-50%);
+            width: 100%; text-align: center;
+            color: white; font-weight: 600; font-size: 16px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            display: flex; align-items: center; justify-content: center; gap: 5px;
+        }
+        .ex-label span { color: #FFC107; font-size: 18px; } /* The yellow arrow */
+        
+        /* Positions */
+        .ex-1 { width: 320px; height: 320px; top: 50px; left: 50px; z-index: 2; } /* Ummed Bhawan */
+        .ex-2 { width: 300px; height: 300px; top: 0px; right: 300px; z-index: 3; } /* Mehrangarh */
+        .ex-3 { width: 280px; height: 280px; bottom: 0px; right: 100px; z-index: 2; } /* Jaswant Thada */
+        .ex-4 { width: 220px; height: 220px; bottom: 0px; left: 350px; z-index: 1; } /* Mandore */
+        .ex-5 { width: 140px; height: 140px; top: 150px; right: 50px; z-index: 1; } /* Small Circle 1 */
+        .ex-6 { width: 120px; height: 120px; bottom: 80px; left: 100px; z-index: 1; } /* Small Circle 2 */
+        .ex-7 { width: 110px; height: 110px; top: 180px; left: 450px; z-index: 0; } /* Small Circle 3 */
+        
+        /* Mobile Responsive */
+        @media (max-width: 950px) {
+            .explore-section { height: auto; padding: 60px 20px; }
+            .explore-grid { height: auto; display: flex; flex-direction: column; align-items: center; gap: 30px; }
+            .ex-circle { position: relative; top: auto !important; left: auto !important; right: auto !important; bottom: auto !important; width: 280px; height: 280px; }
+            .ex-5, .ex-6, .ex-7 { display: none; } /* Hide small circles on mobile */
+        }
 
 
         /* --- RESPONSIVE MEDIA QUERIES --- */
@@ -302,15 +477,23 @@
             .features-box { grid-template-columns: 1fr; padding: 40px 20px 20px 20px; }
             .host-stats { gap: 15px; }
             .stat-item { border-right: none; border-bottom: 1px solid #ddd; padding-bottom: 10px; width: 100%; }
+
+            /* Itinerary Mobile */
+            .t-card { flex-direction: column; text-align: center; }
+            .t-img { width: 100%; height: 180px; }
+            .t-meta { justify-content: center; }
+            .node-card { width: 100%; }
         }
+
+        
     </style>
 </head>
 <body>
 
     <header class="header-container">
         <nav class="nav-menu">
-            <a href="#" class="nav-link active">About</a>
-            <a href="#" class="nav-link">Itinerary</a>
+            <a href="#" class="nav-link">About</a>
+            <a href="#" class="nav-link active">Itinerary</a>
             <a href="#" class="nav-link">Review</a>
         </nav>
         <div class="logo-section">
@@ -429,6 +612,116 @@
         </div>
     </section>
 
+    <section class="itinerary-section" style="background-color: #EEF2FF;">
+        <img src="Assets/Jodhpur01 left.svg" alt="f" style="position: absolute; left: 0px; transform: translatey(900px); width: 20%;">
+        <img src="Assets/Jodhpur02 right.svg" alt="f" style="position: absolute; right: 0px; transform: translatey(100px); width: 20%;">
+        <img src="Assets/footsteps.svg" alt="footsteps" style="position: absolute; width: 2%; transform: translateY(174px);left: 28%; ">
+        <img src="Assets/footsteps.svg" alt="footsteps" style="position: absolute; width: 2%; transform: translateY(174px); right: 28%; ">
+        <div class="itinerary-header">
+            <span class="about-pill" style="margin-bottom: 5px;">About the journey</span>
+            <h2>Tour <span>Itinerary</span></h2>
+            <p>A journey through time and culture</p>
+        </div>
+
+        <div class="timeline-container">
+            
+            <div class="node-card">
+                <div class="node-icon-box node-start">
+                    <img src="Assets/mdi_location.svg" alt="start" style="width: 50%;">
+                    Start
+                </div>
+                <div class="node-text">
+                    <h4>Meeting Point: Sagar And Company</h4>
+                    <p>77 Sardar Market, near Clock Tower.</p>
+                </div>
+            </div>
+
+            <div class="timeline-connector"></div>
+
+            <div class="t-card">
+                <div class="t-img"><img src="Assets/CL.png" alt="Clock Tower"></div>
+                <div class="t-content">
+                    <div class="t-title">Clock Tower Market</div>
+                    <div class="t-desc">Bustling local bazaar filled with spices, crafts, and history. Symbol of Jodhpur's urban growth.</div>
+                    <div class="t-meta">
+                        <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                        20 mins
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-connector"></div>
+
+            <div class="t-card">
+                <div class="t-img"><img src="Assets/toor.png" alt="Stepwell"></div>
+                <div class="t-content">
+                    <div class="t-title">Toorji Ka Jhalra (Stepwell)</div>
+                    <div class="t-desc">An architectural marvel featuring intricate sandstone carvings and a submerged pool of water.</div>
+                    <div class="t-meta">
+                        <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                        20 mins
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-connector"></div>
+
+            <div class="t-card">
+                <div class="t-img"><img src="Assets/CITY.png" alt="Blue City"></div>
+                <div class="t-content">
+                    <div class="t-title">City Police</div>
+                    <div class="t-desc">The primary "City Police" location in the heart of the old city. A landmark for local navigation.</div>
+                    <div class="t-meta">
+                        <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                        20 mins
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-connector"></div>
+
+            <div class="t-card">
+                <div class="t-img"><img src="Assets/pac.png" alt="Hills"></div>
+                <div class="t-content">
+                    <div class="t-title">Pachetiya Hills</div>
+                    <div class="t-desc">A popular spot for travelers to witness breathtaking sunrises and sunsets while exploring narrow lanes.</div>
+                    <div class="t-meta">
+                        <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                        20 mins
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-connector"></div>
+
+            <div class="t-card">
+                <div class="t-img"><img src="Assets/nav.png" alt="Navchowkiya"></div>
+                <div class="t-content">
+                    <div class="t-title">Navchowkiya</div>
+                    <div class="t-desc">Ancient neighborhood designed for royal courtiers. Famous for blue-painted homes.</div>
+                    <div class="t-meta">
+                        <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                        20 mins
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-connector"></div>
+
+            <div class="node-card">
+                <div class="node-icon-box node-end">
+                    <img src="Assets/lets-icons_done-ring-round.svg" alt="done" style="width: 50%;">
+                    FINISH
+                </div>
+                <div class="node-text end">
+                    <h4>Tour Ends</h4>
+                    <p>Back at Sagar And Company, near Clock Tower.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
     <section class="highlights-section">
         <div class="highlights-center"> 
             <span class="about-pill">Experience the Best</span>
@@ -442,36 +735,74 @@
         </div>
 
         <div class="h-card h-c1">
-            <div class="h-img-circle"><img src="https://images.unsplash.com/photo-1572886729007-422998379447?q=80&w=200" alt="Blue City"></div>
+            <div class="h-img-circle"><img src="Assets/1 blue city.png" alt="Blue City"></div>
             <div class="h-text">Blue Old City</div>
         </div>
 
         <div class="h-card h-c2">
-            <div class="h-img-circle"><img src="https://images.unsplash.com/photo-1598509524136-121546e8c792?q=80&w=200" alt="Street Food"></div>
+            <div class="h-img-circle"><img src="Assets/2 mirchi.png" alt="Street Food"></div>
             <div class="h-text">Famous Street Food</div>
         </div>
 
         <div class="h-card h-c3">
-            <div class="h-img-circle"><img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=200" alt="Markets"></div>
+            <div class="h-img-circle"><img src="Assets/3 local.png" alt="Markets"></div>
             <div class="h-text">Local Markets</div>
         </div>
 
         <div class="h-card h-c4">
-            <div class="h-img-circle"><img src="https://images.unsplash.com/photo-1534234828569-1f942743b3e9?q=80&w=200" alt="Mehrangarh"></div>
+            <div class="h-img-circle"><img src="Assets/4 meh.png" alt="Mehrangarh"></div>
             <div class="h-text">Mehrangarh Fort</div>
         </div>
 
         <div class="h-card h-c5">
-            <div class="h-img-circle"><img src="https://images.unsplash.com/photo-1627916524330-316223e75390?q=80&w=200" alt="Sunset"></div>
+            <div class="h-img-circle"><img src="Assets/5 sunset.png" alt="Sunset"></div>
             <div class="h-text">Sunset Points</div>
         </div>
 
         <div class="h-card h-c6">
-            <div class="h-img-circle"><img src="https://images.unsplash.com/photo-1621245789647-70020f5904a4?q=80&w=200" alt="Temples"></div>
+            <div class="h-img-circle"><img src="Assets/6 temp.png" alt="Temples"></div>
             <div class="h-text">Temples & Stepwells</div>
         </div>
 
     </section>
+    
+    <section class="explore-section">
+        <div class="explore-map-bg"><img src="Assets/Map Blue section.svg" alt="Map" style="width: 50%; transform: translateY(400px);"></div>
+        
+        <div class="explore-header">
+            <span class="explore-pill">Places you'll remember</span>
+            <h2>More to Explore on <span>Your Own</span></h2>
+            <p>Once the tour ends, here are more gems you can visit. We're happy to help with directions!</p>
+        </div>
+    
+        <div class="explore-grid">
+            <div class="ex-circle ex-1">
+                <img src="Assets/umm.png" alt="Ummed Bhawan">
+                <div class="ex-label">Ummed Bhawan <span>↗</span></div>
+            </div>
+            
+            <div class="ex-circle ex-2">
+                <img src="Assets/meh.png" alt="Mehrangarh">
+                <div class="ex-label">Mehrangarh Fort <span>↗</span></div>
+            </div>
+    
+            <div class="ex-circle ex-3">
+                <img src="Assets/jas.png" alt="Jaswant Thada">
+                <div class="ex-label">Jaswant Thada <span>↗</span></div>
+            </div>
+    
+            <div class="ex-circle ex-4">
+                <img src="Assets/man.png" alt="Mandore">
+                <div class="ex-label">Mandore Garden <span>↗</span></div>
+            </div>
+    
+            <div class="ex-circle ex-5"><img src="Assets/dokr.png" alt="Decor"></div>
+            <div class="ex-circle ex-6"><img src="Assets/lugai.png" alt="Decor"></div>
+            <div class="ex-circle ex-7"><img src="Assets/tan.png" alt="Decor"></div>
+        </div>
+    </section>
+
+    
 
     <script>
         function toggleMenu() {
